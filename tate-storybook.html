@@ -26,6 +26,7 @@
     background-image: 
       radial-gradient(circle at 20% 20%, rgba(212,168,67,0.2) 0%, transparent 50%),
       radial-gradient(circle at 80% 80%, rgba(200,128,64,0.15) 0%, transparent 50%);
+    transition: background 0.6s ease;
     font-family: 'Nunito', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
@@ -48,6 +49,7 @@
   /* ===== COVER ===== */
   .book-cover {
     background: linear-gradient(145deg, #8B3A1A, #C06B2E, #D4A843);
+    transition: background 0.6s ease;
     border-radius: 24px;
     padding: 50px 40px 40px;
     text-align: center;
@@ -385,6 +387,15 @@
     .page { padding: 25px 20px; }
     .book-cover { padding: 35px 25px 30px; }
   }
+
+  /* CONFETTI */
+  #confettiCanvas {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    border-radius: 20px;
+  }
 </style>
 </head>
 <body>
@@ -392,84 +403,12 @@
 <div class="book-wrapper">
 
   <!-- BOOK COVER -->
-  <div class="book-cover">
+  <div class="book-cover" id="bookCover">
+    <canvas id="confettiCanvas"></canvas>
     <div class="cover-bone">🦴 🐾 🦴</div>
     <div class="cover-title">The Big Life of a Very Small Star</div>
     <div class="cover-subtitle">An Unauthorized Autobiography (I Authorized It)</div>
-    <div class="dog-portrait">
-  <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
-    <!-- Whole dog bounces together -->
-    <g style="animation: bodyBop 1.4s ease-in-out infinite; transform-origin: 100px 160px;">
-
-      <!-- TAIL wagging off the back -->
-      <g style="animation: tailWag 0.6s ease-in-out infinite; transform-origin: 148px 155px; transform-box: fill-box;">
-        <path d="M148 155 Q175 135 178 115 Q182 100 170 108" stroke="#B87030" stroke-width="12" fill="none" stroke-linecap="round"/>
-        <circle cx="170" cy="108" r="10" fill="#D4A060"/>
-      </g>
-
-      <!-- BODY -->
-      <ellipse cx="100" cy="168" rx="44" ry="40" fill="#C88040"/>
-      <ellipse cx="100" cy="172" rx="26" ry="26" fill="#E8B870"/>
-
-      <!-- LEGS (just stubs, no independent animation) -->
-      <rect x="72" y="195" width="18" height="30" rx="9" fill="#B87030"/>
-      <rect x="110" y="195" width="18" height="30" rx="9" fill="#B87030"/>
-      <!-- Paws -->
-      <ellipse cx="81" cy="226" rx="13" ry="8" fill="#B87030"/>
-      <ellipse cx="119" cy="226" rx="13" ry="8" fill="#B87030"/>
-
-      <!-- ARMS (little stubs out the sides, slight wave built into bodyBop) -->
-      <rect x="38" y="148" width="22" height="14" rx="7" fill="#C88040" transform="rotate(-15 38 148)"/>
-      <circle cx="36" cy="158" r="9" fill="#C88040"/>
-
-      <rect x="140" y="148" width="22" height="14" rx="7" fill="#C88040" transform="rotate(15 162 148)"/>
-      <circle cx="164" cy="158" r="9" fill="#C88040"/>
-
-      <!-- NECK -->
-      <ellipse cx="100" cy="128" rx="22" ry="14" fill="#C88040"/>
-
-      <!-- HEAD -->
-      <ellipse cx="100" cy="98" rx="42" ry="40" fill="#C88040"/>
-
-      <!-- EARS (floppy) -->
-      <ellipse cx="63" cy="100" rx="18" ry="30" fill="#B87030" transform="rotate(-8 63 100)"/>
-      <ellipse cx="137" cy="100" rx="18" ry="30" fill="#B87030" transform="rotate(8 137 100)"/>
-
-      <!-- HEAD top floof -->
-      <ellipse cx="100" cy="64" rx="28" ry="16" fill="#D4A060"/>
-      <ellipse cx="82" cy="68" rx="16" ry="12" fill="#C89450"/>
-      <ellipse cx="118" cy="68" rx="16" ry="12" fill="#C89450"/>
-      <ellipse cx="100" cy="62" rx="12" ry="10" fill="#D4A868"/>
-
-      <!-- EYES -->
-      <circle cx="85" cy="92" r="8" fill="#2A1005"/>
-      <circle cx="115" cy="92" r="8" fill="#2A1005"/>
-      <circle cx="87" cy="89" r="3" fill="white"/>
-      <circle cx="117" cy="89" r="3" fill="white"/>
-
-      <!-- NOSE -->
-      <ellipse cx="100" cy="108" rx="9" ry="6" fill="#1A0A02"/>
-      <ellipse cx="99" cy="106" rx="4" ry="2" fill="#3A1A08"/>
-
-      <!-- SMILE -->
-      <path d="M88 116 Q100 127 112 116" stroke="#1A0A02" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-
-      <!-- TONGUE -->
-      <ellipse cx="100" cy="122" rx="7" ry="6" fill="#E07070"/>
-      <line x1="100" y1="117" x2="100" y2="128" stroke="#C05555" stroke-width="1.5"/>
-
-      <!-- ROSY CHEEKS -->
-      <ellipse cx="74" cy="108" rx="9" ry="6" fill="#F0A0A0" opacity="0.45"/>
-      <ellipse cx="126" cy="108" rx="9" ry="6" fill="#F0A0A0" opacity="0.45"/>
-
-    </g>
-
-    <!-- Floating sparkles -->
-    <text x="15" y="55" font-size="20" style="animation: sparkle 2s ease-in-out infinite;">✨</text>
-    <text x="165" y="45" font-size="15" style="animation: sparkle 2s ease-in-out infinite 0.8s;">⭐</text>
-    <text x="22" y="210" font-size="13" style="animation: sparkle 2s ease-in-out infinite 1.4s;">✨</text>
-  </svg>
-</div>
+    <div class="dog-portrait" id="dogPortrait"></div>
     <div class="cover-name" id="coverName">TATE</div>
     <div class="cover-tagline" id="coverTagline">🌟 A.K.A. Tater Tot, Bubs, Bubbsy & Dude 🌟</div>
   </div>
@@ -526,6 +465,204 @@
 </div>
 
 <script>
+
+function getDogColors(hairDescription) {
+  const h = hairDescription.toLowerCase();
+  if ((h.includes('black') && h.includes('grey')) || (h.includes('black') && h.includes('gray')) || (h.includes('black') && h.includes('silver'))) {
+    return { main: '#555', dark: '#222', light: '#888', tummy: '#777', floof: '#555' };
+  }
+  if (h.includes('black')) {
+    return { main: '#2E2E2E', dark: '#111', light: '#555', tummy: '#444', floof: '#3A3A3A' };
+  }
+  if (h.includes('grey') || h.includes('gray') || h.includes('silver')) {
+    return { main: '#999', dark: '#666', light: '#BBB', tummy: '#CCC', floof: '#AAA' };
+  }
+  if (h.includes('white') || h.includes('cream') || h.includes('ivory')) {
+    return { main: '#F0EAD6', dark: '#C8B89A', light: '#FFF8EE', tummy: '#FFF8EE', floof: '#EDE0C4' };
+  }
+  if (h.includes('chocolate') || h.includes('dark brown') || h.includes('brown')) {
+    return { main: '#7B4A2D', dark: '#4E2B12', light: '#A0673A', tummy: '#C08050', floof: '#8B5530' };
+  }
+  if (h.includes('apricot') || h.includes('orange')) {
+    return { main: '#E8924A', dark: '#C06820', light: '#F0B070', tummy: '#F5C888', floof: '#ECA050' };
+  }
+  if (h.includes('red')) {
+    return { main: '#C88040', dark: '#B87030', light: '#D4A060', tummy: '#E8B870', floof: '#D4A868' };
+  }
+  if (h.includes('blond') || h.includes('blonde') || h.includes('golden') || h.includes('gold') || h.includes('yellow')) {
+    return { main: '#D4A843', dark: '#B88828', light: '#E8C870', tummy: '#F0D890', floof: '#DEB850' };
+  }
+  if (h.includes('parti') || h.includes('multi') || h.includes('spotted')) {
+    return { main: '#C8B89A', dark: '#7B4A2D', light: '#E8D8B8', tummy: '#F0EAD6', floof: '#D4C4A0' };
+  }
+  return { main: '#C88040', dark: '#B87030', light: '#D4A060', tummy: '#E8B870', floof: '#D4A868' };
+}
+
+function getBackgroundColors(c) {
+  // derive page background tones from dog main color
+  const hex = c.main;
+  return {
+    bodyBg: c.tummy,
+    coverGrad: `linear-gradient(145deg, ${c.dark}, ${c.main}, ${c.light})`,
+    radial1: c.light,
+    radial2: c.main
+  };
+}
+
+function makeMiniDog(c, scale) {
+  scale = scale || 0.45;
+  const w = Math.round(200 * scale);
+  const h = Math.round(260 * scale);
+  return `<svg viewBox="0 0 200 260" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="100" cy="168" rx="44" ry="40" fill="${c.main}"/>
+    <ellipse cx="100" cy="172" rx="26" ry="26" fill="${c.tummy}"/>
+    <rect x="72" y="195" width="18" height="30" rx="9" fill="${c.dark}"/>
+    <rect x="110" y="195" width="18" height="30" rx="9" fill="${c.dark}"/>
+    <ellipse cx="81" cy="226" rx="13" ry="8" fill="${c.dark}"/>
+    <ellipse cx="119" cy="226" rx="13" ry="8" fill="${c.dark}"/>
+    <rect x="38" y="148" width="22" height="14" rx="7" fill="${c.main}" transform="rotate(-15 38 148)"/>
+    <circle cx="36" cy="158" r="9" fill="${c.main}"/>
+    <rect x="140" y="148" width="22" height="14" rx="7" fill="${c.main}" transform="rotate(15 162 148)"/>
+    <circle cx="164" cy="158" r="9" fill="${c.main}"/>
+    <ellipse cx="100" cy="128" rx="22" ry="14" fill="${c.main}"/>
+    <ellipse cx="100" cy="98" rx="42" ry="40" fill="${c.main}"/>
+    <ellipse cx="63" cy="100" rx="18" ry="30" fill="${c.dark}" transform="rotate(-8 63 100)"/>
+    <ellipse cx="137" cy="100" rx="18" ry="30" fill="${c.dark}" transform="rotate(8 137 100)"/>
+    <ellipse cx="100" cy="64" rx="28" ry="16" fill="${c.floof}"/>
+    <ellipse cx="82" cy="68" rx="16" ry="12" fill="${c.floof}"/>
+    <ellipse cx="118" cy="68" rx="16" ry="12" fill="${c.floof}"/>
+    <ellipse cx="100" cy="62" rx="12" ry="10" fill="${c.light}"/>
+    <circle cx="85" cy="92" r="8" fill="#2A1005"/>
+    <circle cx="115" cy="92" r="8" fill="#2A1005"/>
+    <circle cx="87" cy="89" r="3" fill="white"/>
+    <circle cx="117" cy="89" r="3" fill="white"/>
+    <ellipse cx="100" cy="108" rx="9" ry="6" fill="#1A0A02"/>
+    <path d="M88 116 Q100 127 112 116" stroke="#1A0A02" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="100" cy="122" rx="7" ry="6" fill="#E07070"/>
+    <ellipse cx="74" cy="108" rx="9" ry="6" fill="#F0A0A0" opacity="0.45"/>
+    <ellipse cx="126" cy="108" rx="9" ry="6" fill="#F0A0A0" opacity="0.45"/>
+  </svg>`;
+}
+
+// ---- CONFETTI ----
+let confettiParticles = [];
+let confettiAnimFrame;
+
+function initConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  const cover = document.getElementById('bookCover');
+  canvas.width = cover.offsetWidth;
+  canvas.height = cover.offsetHeight;
+  confettiParticles = [];
+  const items = ['🦴','🐾','✨','⭐','🦴','🐾','🦴'];
+  for (let i = 0; i < 28; i++) {
+    confettiParticles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      emoji: items[Math.floor(Math.random() * items.length)],
+      size: 14 + Math.random() * 14,
+      speedY: 0.8 + Math.random() * 1.4,
+      speedX: (Math.random() - 0.5) * 1.2,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.08,
+      opacity: 0.7 + Math.random() * 0.3
+    });
+  }
+  if (confettiAnimFrame) cancelAnimationFrame(confettiAnimFrame);
+  drawConfetti();
+}
+
+function drawConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  confettiParticles.forEach(p => {
+    ctx.save();
+    ctx.globalAlpha = p.opacity;
+    ctx.font = p.size + 'px serif';
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation);
+    ctx.fillText(p.emoji, -p.size/2, p.size/2);
+    ctx.restore();
+    p.y += p.speedY;
+    p.x += p.speedX;
+    p.rotation += p.rotSpeed;
+    if (p.y > canvas.height + 20) {
+      p.y = -20;
+      p.x = Math.random() * canvas.width;
+    }
+  });
+  confettiAnimFrame = requestAnimationFrame(drawConfetti);
+}
+
+function renderDog(hairDescription) {
+  const c = getDogColors(hairDescription);
+
+  // Update background
+  const bg = getBackgroundColors(c);
+  document.body.style.backgroundColor = bg.bodyBg;
+  document.getElementById('bookCover').style.background = bg.coverGrad;
+
+  // Update chapter 1 illustration (two mini dogs flanking a bone)
+  const ch1 = document.getElementById('ch1Illustration');
+  if (ch1) {
+    ch1.innerHTML = makeMiniDog(c, 0.38) + ' <span style="font-size:2rem;vertical-align:middle;">✨ 🦴 ✨</span> ' + makeMiniDog(c, 0.38);
+  }
+
+  // Update chapter 5 illustration (family + dog + heart)
+  const ch5 = document.getElementById('ch5Illustration');
+  if (ch5) {
+    ch5.innerHTML = '<span style="font-size:2.5rem;vertical-align:middle;">👨‍👩‍👧 </span>' + makeMiniDog(c, 0.38) + '<span style="font-size:2.5rem;vertical-align:middle;"> 💕</span>';
+  }
+
+  // Init confetti
+  initConfetti();
+
+  document.getElementById('dogPortrait').innerHTML = `
+  <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+    <g style="animation: bodyBop 1.4s ease-in-out infinite; transform-origin: 100px 160px;">
+      <g style="animation: tailWag 0.6s ease-in-out infinite; transform-origin: 148px 155px; transform-box: fill-box;">
+        <path d="M148 155 Q175 135 178 115 Q182 100 170 108" stroke="${c.dark}" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <circle cx="170" cy="108" r="10" fill="${c.light}"/>
+      </g>
+      <ellipse cx="100" cy="168" rx="44" ry="40" fill="${c.main}"/>
+      <ellipse cx="100" cy="172" rx="26" ry="26" fill="${c.tummy}"/>
+      <rect x="72" y="195" width="18" height="30" rx="9" fill="${c.dark}"/>
+      <rect x="110" y="195" width="18" height="30" rx="9" fill="${c.dark}"/>
+      <ellipse cx="81" cy="226" rx="13" ry="8" fill="${c.dark}"/>
+      <ellipse cx="119" cy="226" rx="13" ry="8" fill="${c.dark}"/>
+      <rect x="38" y="148" width="22" height="14" rx="7" fill="${c.main}" transform="rotate(-15 38 148)"/>
+      <circle cx="36" cy="158" r="9" fill="${c.main}"/>
+      <rect x="140" y="148" width="22" height="14" rx="7" fill="${c.main}" transform="rotate(15 162 148)"/>
+      <circle cx="164" cy="158" r="9" fill="${c.main}"/>
+      <ellipse cx="100" cy="128" rx="22" ry="14" fill="${c.main}"/>
+      <ellipse cx="100" cy="98" rx="42" ry="40" fill="${c.main}"/>
+      <ellipse cx="63" cy="100" rx="18" ry="30" fill="${c.dark}" transform="rotate(-8 63 100)"/>
+      <ellipse cx="137" cy="100" rx="18" ry="30" fill="${c.dark}" transform="rotate(8 137 100)"/>
+      <ellipse cx="100" cy="64" rx="28" ry="16" fill="${c.floof}"/>
+      <ellipse cx="82" cy="68" rx="16" ry="12" fill="${c.floof}"/>
+      <ellipse cx="118" cy="68" rx="16" ry="12" fill="${c.floof}"/>
+      <ellipse cx="100" cy="62" rx="12" ry="10" fill="${c.light}"/>
+      <circle cx="85" cy="92" r="8" fill="#2A1005"/>
+      <circle cx="115" cy="92" r="8" fill="#2A1005"/>
+      <circle cx="87" cy="89" r="3" fill="white"/>
+      <circle cx="117" cy="89" r="3" fill="white"/>
+      <ellipse cx="100" cy="108" rx="9" ry="6" fill="#1A0A02"/>
+      <ellipse cx="99" cy="106" rx="4" ry="2" fill="#3A1A08"/>
+      <path d="M88 116 Q100 127 112 116" stroke="#1A0A02" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="100" cy="122" rx="7" ry="6" fill="#E07070"/>
+      <line x1="100" y1="117" x2="100" y2="128" stroke="#C05555" stroke-width="1.5"/>
+      <ellipse cx="74" cy="108" rx="9" ry="6" fill="#F0A0A0" opacity="0.45"/>
+      <ellipse cx="126" cy="108" rx="9" ry="6" fill="#F0A0A0" opacity="0.45"/>
+    </g>
+    <text x="15" y="55" font-size="20" style="animation: sparkle 2s ease-in-out infinite;">✨</text>
+    <text x="165" y="45" font-size="15" style="animation: sparkle 2s ease-in-out infinite 0.8s;">⭐</text>
+    <text x="22" y="210" font-size="13" style="animation: sparkle 2s ease-in-out infinite 1.4s;">✨</text>
+  </svg>`;
+}
+
 function generateStory() {
   const names = document.getElementById('names').value;
   const age = document.getElementById('age').value;
@@ -534,6 +671,7 @@ function generateStory() {
   const toys = document.getElementById('toys').value;
   const personality = document.getElementById('personality').value;
   const hair = document.getElementById('hair').value;
+  renderDog(hair);
   const weight = document.getElementById('weight').value;
   const owners = document.getElementById('owners').value;
 
@@ -588,7 +726,7 @@ function generateStory() {
           <span>The origin story nobody asked for</span>
         </div>
       </div>
-      <div class="illustration">🐶 ✨ 🦴 ✨ 🐶</div>
+      <div class="illustration" id="ch1Illustration" style="font-size:1rem; line-height:1;"></div>
       <div class="story-text">
         <p>Hi. Hello. Bonjour. My name is <strong>${firstName}</strong> — though I also go by <strong>${nicknames}</strong>, depending on how dramatic the situation is. You can call me whatever. As long as you're also holding a treat, I'll answer.</p>
         <div class="quote">"${toneLine}"</div>
@@ -682,7 +820,7 @@ function generateStory() {
           <span>A heartfelt dedication</span>
         </div>
       </div>
-      <div class="illustration">👨‍👩‍👧 🐶 💕</div>
+      <div class="illustration" id="ch5Illustration" style="font-size:1rem; line-height:1;"></div>
       <div class="story-text">
         <p>Now. I would be nothing without my humans. And by "nothing" I mean I would still be absolutely amazing but slightly less spoiled. So they matter.</p>
         <div class="quote">"They feed me. They walk me. They give me belly rubs on demand. Honestly? A great team. Strong five stars. Would recommend."</div>
