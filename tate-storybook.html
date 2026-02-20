@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Big Life of Tate the Doodle</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF8EE;
+    --warm: #F5E6C8;
+    --gold: #D4A843;
+    --rust: #C06B2E;
+    --brown: #7B4A2D;
+    --red-blond: #C88040;
+    --sage: #8BAF7C;
+    --sky: #7BB8D4;
+    --pink: #E8A0A0;
+    --shadow: rgba(120,70,30,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--warm);
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(212,168,67,0.2) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(200,128,64,0.15) 0%, transparent 50%);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* PAW PRINT BACKGROUND */
+  body::before {
+    content: '🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾';
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    font-size: 40px; line-height: 60px; letter-spacing: 30px;
+    opacity: 0.04; pointer-events: none; z-index: 0;
+    word-break: break-all;
+  }
+
+  .book-wrapper {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto; padding: 30px 20px 60px;
+  }
+
+  /* ===== COVER ===== */
+  .book-cover {
+    background: linear-gradient(145deg, #8B3A1A, #C06B2E, #D4A843);
+    border-radius: 24px;
+    padding: 50px 40px 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(100,40,10,0.4), inset 0 2px 4px rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 6px solid var(--brown);
+  }
+
+  .book-cover::before {
+    content: '';
+    position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 2px dashed rgba(255,255,255,0.3);
+    border-radius: 18px; pointer-events: none;
+  }
+
+  .cover-bone {
+    font-size: 28px;
+    display: flex; justify-content: center; gap: 15px;
+    margin-bottom: 10px;
+    animation: wiggle 2s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%,100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  .cover-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    color: #FFF8EE;
+    text-shadow: 3px 4px 0 rgba(100,40,10,0.5);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .cover-subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    color: rgba(255,248,238,0.9);
+    margin-bottom: 30px;
+  }
+
+  /* DOG ILLUSTRATION AREA */
+  .dog-portrait {
+    width: 220px; height: 280px;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .dog-portrait svg {
+    width: 100%; height: 100%;
+    filter: drop-shadow(0 8px 16px rgba(100,40,10,0.35));
+  }
+  @keyframes bodyBop {
+    0%,100% { transform: translateY(0) rotate(-4deg); }
+    25%     { transform: translateY(-10px) rotate(4deg); }
+    50%     { transform: translateY(-4px) rotate(-3deg); }
+    75%     { transform: translateY(-14px) rotate(5deg); }
+  }
+  @keyframes tailWag {
+    0%,100% { transform: rotate(0deg); }
+    50%     { transform: rotate(35deg); }
+  }
+
+
+
+
+
+  @keyframes sparkle {
+    0%,100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.5; transform: scale(1.3) rotate(20deg); }
+  }
+
+  .cover-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    color: #FFF8EE;
+    text-shadow: 4px 5px 0 rgba(100,40,10,0.6);
+    margin-bottom: 5px;
+  }
+
+  .cover-tagline {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    color: rgba(255,248,238,0.85);
+    background: rgba(0,0,0,0.2);
+    display: inline-block;
+    padding: 5px 18px;
+    border-radius: 20px;
+    margin-top: 5px;
+  }
+
+  /* ===== INPUT SECTION ===== */
+  .input-section {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 8px 30px var(--shadow);
+    border: 3px solid var(--gold);
+  }
+
+  .input-section h2 {
+    font-family: 'Fredoka One', cursive;
+    color: var(--rust);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .input-group {
+    display: flex; flex-direction: column; gap: 5px;
+  }
+
+  .input-group label {
+    font-weight: 800;
+    color: var(--brown);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .input-group input, .input-group textarea {
+    border: 2.5px solid var(--warm);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: var(--brown);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .input-group input:focus, .input-group textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  .generate-btn {
+    display: block;
+    margin: 25px auto 0;
+    background: linear-gradient(135deg, var(--rust), var(--gold));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 40px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(192,107,46,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .generate-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 28px rgba(192,107,46,0.5);
+  }
+
+  /* ===== BOOK PAGES ===== */
+  .book-pages {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .book-pages.visible { display: flex; }
+
+  .page {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 35px 40px;
+    box-shadow: 0 8px 30px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.8);
+    border: 3px solid var(--warm);
+    position: relative;
+    overflow: hidden;
+    animation: pageFlip 0.6s ease both;
+  }
+
+  @keyframes pageFlip {
+    from { opacity: 0; transform: translateY(30px) rotateX(5deg); }
+    to { opacity: 1; transform: translateY(0) rotateX(0); }
+  }
+
+  .page:nth-child(1) { animation-delay: 0.1s; }
+  .page:nth-child(2) { animation-delay: 0.2s; }
+  .page:nth-child(3) { animation-delay: 0.3s; }
+  .page:nth-child(4) { animation-delay: 0.4s; }
+  .page:nth-child(5) { animation-delay: 0.5s; }
+
+  .page-corner {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 50px; height: 50px;
+    background: linear-gradient(135deg, transparent 50%, var(--gold) 50%);
+    opacity: 0.4;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px dotted var(--gold);
+  }
+
+  .page-emoji {
+    font-size: 3rem;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .page-title {
+    font-family: 'Fredoka One', cursive;
+    color: var(--rust);
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .page-title span {
+    display: block;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--brown);
+    font-weight: 600;
+  }
+
+  .story-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #5C3A1E;
+    font-weight: 600;
+  }
+
+  .story-text p { margin-bottom: 12px; }
+
+  .story-text .quote {
+    background: linear-gradient(135deg, rgba(212,168,67,0.15), rgba(192,107,46,0.1));
+    border-left: 4px solid var(--gold);
+    padding: 12px 18px;
+    border-radius: 0 12px 12px 0;
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--rust);
+    margin: 15px 0;
+  }
+
+  .illustration {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 4rem;
+    line-height: 1;
+    letter-spacing: 5px;
+    filter: drop-shadow(2px 3px 4px rgba(120,70,30,0.2));
+  }
+
+  .fact-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .chip {
+    background: linear-gradient(135deg, var(--gold), var(--rust));
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(192,107,46,0.3);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 15px;
+  }
+
+  .fun-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+    border: 2px solid var(--warm);
+    text-align: center;
+  }
+
+  .fun-card .icon { font-size: 2.5rem; margin-bottom: 8px; }
+  .fun-card h4 { font-family: 'Fredoka One', cursive; color: var(--rust); font-size: 1.1rem; margin-bottom: 6px; }
+  .fun-card p { font-size: 0.9rem; color: var(--brown); font-weight: 600; }
+
+  .page-number {
+    position: absolute;
+    bottom: 15px;
+    right: 60px;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .dedication {
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--brown);
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    border: 2px dashed var(--gold);
+    margin-top: 10px;
+  }
+
+  .dedication strong { color: var(--rust); font-size: 1.6rem; }
+
+  @media (max-width: 580px) {
+    .two-col { grid-template-columns: 1fr; }
+    .page { padding: 25px 20px; }
+    .book-cover { padding: 35px 25px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="book-wrapper">
+
+  <!-- BOOK COVER -->
+  <div class="book-cover">
+    <div class="cover-bone">🦴 🐾 🦴</div>
+    <div class="cover-title">The Big Life of a Very Small Star</div>
+    <div class="cover-subtitle">An Unauthorized Autobiography (I Authorized It)</div>
+    <div class="dog-portrait">
+  <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+    <!-- Whole dog bounces together -->
+    <g style="animation: bodyBop 1.4s ease-in-out infinite; transform-origin: 100px 160px;">
+
+      <!-- TAIL wagging off the back -->
+      <g style="animation: tailWag 0.6s ease-in-out infinite; transform-origin: 148px 155px; transform-box: fill-box;">
+        <path d="M148 155 Q175 135 178 115 Q182 100 170 108" stroke="#B87030" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <circle cx="170" cy="108" r="10" fill="#D4A060"/>
+      </g>
+
+      <!-- BODY -->
+      <ellipse cx="100" cy="168" rx="44" ry="40" fill="#C88040"/>
+      <ellipse cx="100" cy="172" rx="26" ry="26" fill="#E8B870"/>
+
+      <!-- LEGS (just stubs, no independent animation) -->
+      <rect x="72" y="195" width="18" height="30" rx="9" fill="#B87030"/>
+      <rect x="110" y="195" width="18" height="30" rx="9" fill="#B87030"/>
+      <!-- Paws -->
+      <ellipse cx="81" cy="226" rx="13" ry="8" fill="#B87030"/>
+      <ellipse cx="119" cy="226" rx="13" ry="8" fill="#B87030"/>
+
+      <!-- ARMS (little stubs out the sides, slight wave built into bodyBop) -->
+      <rect x="38" y="148" width="22" height="14" rx="7" fill="#C88040" transform="rotate(-15 38 148)"/>
+      <circle cx="36" cy="158" r="9" fill="#C88040"/>
+
+      <rect x="140" y="148" width="22" height="14" rx="7" fill="#C88040" transform="rotate(15 162 148)"/>
+      <circle cx="164" cy="158" r="9" fill="#C88040"/>
+
+      <!-- NECK -->
+      <ellipse cx="100" cy="128" rx="22" ry="14" fill="#C88040"/>
+
+      <!-- HEAD -->
+      <ellipse cx="100" cy="98" rx="42" ry="40" fill="#C88040"/>
+
+      <!-- EARS (floppy) -->
+      <ellipse cx="63" cy="100" rx="18" ry="30" fill="#B87030" transform="rotate(-8 63 100)"/>
+      <ellipse cx="137" cy="100" rx="18" ry="30" fill="#B87030" transform="rotate(8 137 100)"/>
+
+      <!-- HEAD top floof -->
+      <ellipse cx="100" cy="64" rx="28" ry="16" fill="#D4A060"/>
+      <ellipse cx="82" cy="68" rx="16" ry="12" fill="#C89450"/>
+      <ellipse cx="118" cy="68" rx="16" ry="12" fill="#C89450"/>
+      <ellipse cx="100" cy="62" rx="12" ry="10" fill="#D4A868"/>
+
+      <!-- EYES -->
+      <circle cx="85" cy="92" r="8" fill="#2A1005"/>
+      <circle cx="115" cy="92" r="8" fill="#2A1005"/>
+      <circle cx="87" cy="89" r="3" fill="white"/>
+      <circle cx="117" cy="89" r="3" fill="white"/>
+
+      <!-- NOSE -->
+      <ellipse cx="100" cy="108" rx="9" ry="6" fill="#1A0A02"/>
+      <ellipse cx="99" cy="106" rx="4" ry="2" fill="#3A1A08"/>
+
+      <!-- SMILE -->
+      <path d="M88 116 Q100 127 112 116" stroke="#1A0A02" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+      <!-- TONGUE -->
+      <ellipse cx="100" cy="122" rx="7" ry="6" fill="#E07070"/>
+      <line x1="100" y1="117" x2="100" y2="128" stroke="#C05555" stroke-width="1.5"/>
+
+      <!-- ROSY CHEEKS -->
+      <ellipse cx="74" cy="108" rx="9" ry="6" fill="#F0A0A0" opacity="0.45"/>
+      <ellipse cx="126" cy="108" rx="9" ry="6" fill="#F0A0A0" opacity="0.45"/>
+
+    </g>
+
+    <!-- Floating sparkles -->
+    <text x="15" y="55" font-size="20" style="animation: sparkle 2s ease-in-out infinite;">✨</text>
+    <text x="165" y="45" font-size="15" style="animation: sparkle 2s ease-in-out infinite 0.8s;">⭐</text>
+    <text x="22" y="210" font-size="13" style="animation: sparkle 2s ease-in-out infinite 1.4s;">✨</text>
+  </svg>
+</div>
+    <div class="cover-name" id="coverName">TATE</div>
+    <div class="cover-tagline" id="coverTagline">🌟 A.K.A. Tater Tot, Bubs, Bubbsy & Dude 🌟</div>
+  </div>
+
+  <!-- INPUT SECTION -->
+  <div class="input-section">
+    <h2>📖 Your Doodle's Details</h2>
+    <div class="input-grid">
+      <div class="input-group">
+        <label>🐾 Name + Nicknames</label>
+        <input type="text" id="names" value="Tate, Tater Tot, Bubs, Bubbsy, Dude" placeholder="Name, Nickname1, Nickname2...">
+      </div>
+      <div class="input-group">
+        <label>🎂 Age</label>
+        <input type="text" id="age" value="1.5 years" placeholder="e.g. 1.5 years">
+      </div>
+      <div class="input-group">
+        <label>🐩 Doodle Type</label>
+        <input type="text" id="doodleType" value="Golden Doodle" placeholder="e.g. Golden Doodle">
+      </div>
+      <div class="input-group">
+        <label>🎾 Hobbies</label>
+        <input type="text" id="hobbies" value="Treats, balls, bones, belly rubs, long walks" placeholder="e.g. Treats, belly rubs...">
+      </div>
+      <div class="input-group">
+        <label>🧸 Favorite Toys</label>
+        <input type="text" id="toys" value="my soccer ball, lambchop, and socks" placeholder="e.g. Squeaky ball, rope toy...">
+      </div>
+      <div class="input-group">
+        <label>✨ Personality</label>
+        <input type="text" id="personality" value="Sassy, Spunky, Lovable" placeholder="e.g. Silly, Stubborn, Sweet">
+      </div>
+      <div class="input-group">
+        <label>💈 Hair Color & Type</label>
+        <input type="text" id="hair" value="Reddish Blond Wavy" placeholder="e.g. Cream, curly">
+      </div>
+      <div class="input-group">
+        <label>⚖️ Weight</label>
+        <input type="text" id="weight" value="30 lbs" placeholder="e.g. 30 lbs">
+      </div>
+      <div class="input-group">
+        <label>👨‍👩‍👧 Owner(s)</label>
+        <input type="text" id="owners" value="Dustin, Katie, Annabelle, Lexie" placeholder="e.g. Sarah, Mike">
+      </div>
+    </div>
+    <button class="generate-btn" onclick="generateStory()">✨ Write My Story! ✨</button>
+  </div>
+
+  <!-- BOOK PAGES -->
+  <div class="book-pages" id="bookPages">
+    <!-- Pages injected by JS -->
+  </div>
+
+</div>
+
+<script>
+function generateStory() {
+  const names = document.getElementById('names').value;
+  const age = document.getElementById('age').value;
+  const doodleType = document.getElementById('doodleType').value;
+  const hobbies = document.getElementById('hobbies').value;
+  const toys = document.getElementById('toys').value;
+  const personality = document.getElementById('personality').value;
+  const hair = document.getElementById('hair').value;
+  const weight = document.getElementById('weight').value;
+  const owners = document.getElementById('owners').value;
+
+  const nameList = names.split(',').map(n => n.trim());
+  const ownerList = owners.split(',').map(o => o.trim());
+  const firstName = nameList[0];
+  const nicknames = nameList.slice(1).join(', ');
+  const primaryOwner = ownerList[0];
+  const allOwners = ownerList.join(', ');
+
+  // Determine tone based on age
+  const ageNum = parseFloat(age);
+  let tone, toneLine, ageIntro;
+  if (ageNum < 1) {
+    tone = "baby";
+    toneLine = "I'm literally a BABY. Please be patient. And also give me a treat.";
+    ageIntro = "just a teeny tiny baby who still trips over my own ears";
+  } else if (ageNum < 2) {
+    tone = "toddler";
+    toneLine = "I'm basically a TODDLER. I don't know the rules and honestly... I don't want to.";
+    ageIntro = "a wild and untamed toddler in a floofy dog suit";
+  } else if (ageNum < 5) {
+    tone = "teen";
+    toneLine = "Ugh. I'm basically a TEENAGER. Don't tell me what to do.";
+    ageIntro = "a sassy, spunky teenager who runs this house (don't @ me)";
+  } else if (ageNum < 9) {
+    tone = "adult";
+    toneLine = "I'm a MATURE, distinguished adult. I have opinions. Many of them.";
+    ageIntro = "a refined adult with very important thoughts about treats";
+  } else {
+    tone = "elder";
+    toneLine = "I'm a WISE ELDER. I've seen things. Mostly squirrels.";
+    ageIntro = "a grumpy, glorious old legend who has earned every grey hair";
+  }
+
+  const hobbyList = hobbies.split(',').map(h => h.trim());
+  const toyList = toys.split(',').map(t => t.trim());
+  const personalityList = personality.split(',').map(p => p.trim());
+
+  // Update cover
+  document.getElementById('coverName').textContent = firstName.toUpperCase();
+  document.getElementById('coverTagline').textContent = `🌟 A.K.A. ${nicknames} 🌟`;
+
+  const pages = `
+    <!-- PAGE 1: MEET ME -->
+    <div class="page">
+      <div class="page-corner"></div>
+      <div class="page-header">
+        <div class="page-emoji">🐾</div>
+        <div class="page-title">
+          Chapter 1: Allow Me to Introduce Myself
+          <span>The origin story nobody asked for</span>
+        </div>
+      </div>
+      <div class="illustration">🐶 ✨ 🦴 ✨ 🐶</div>
+      <div class="story-text">
+        <p>Hi. Hello. Bonjour. My name is <strong>${firstName}</strong> — though I also go by <strong>${nicknames}</strong>, depending on how dramatic the situation is. You can call me whatever. As long as you're also holding a treat, I'll answer.</p>
+        <div class="quote">"${toneLine}"</div>
+        <p>I am ${ageIntro}. I am a <strong>${doodleType}</strong>. I have <strong>${hair}</strong> hair that my groomer calls "a challenge" and I call "fabulous." I weigh a very powerful <strong>${weight}</strong>, which is 100% muscle and 0% the treats I stole off the counter. Don't look into it.</p>
+        <p>My humans — the lucky ones — are <strong>${allOwners}</strong>. They think they rescued me. Cute. I rescued <em>them</em>.</p>
+      </div>
+      <div class="page-number">1</div>
+    </div>
+
+    <!-- PAGE 2: MY PERSONALITY -->
+    <div class="page">
+      <div class="page-corner"></div>
+      <div class="page-header">
+        <div class="page-emoji">😤</div>
+        <div class="page-title">
+          Chapter 2: My Personality (It's a Lot)
+          <span>A deep dive into my emotional complexity</span>
+        </div>
+      </div>
+      <div class="illustration">😎 💅 🌟</div>
+      <div class="story-text">
+        <p>People say I'm <strong>${personality}</strong>. Those people are correct. Let me elaborate.</p>
+        <div class="quote">"When I want something, I want it NOW. When I want cuddles, I want MAXIMUM cuddles. There is no in-between. I am not a 'medium' kind of dog."</div>
+        <p>I have moods. Many of them. In the morning I am an absolute angel. By noon I have decided something is unfair. By 3pm I am zooming. By bedtime I am a warm, snuggly loaf of pure love on whoever's lap I can find. I contain multitudes.</p>
+        <p>Some call it <em>sassy</em>. I prefer <em>passionate</em>. Some call it <em>spunky</em>. I prefer <em>misunderstood</em>. But at the end of the day? I am deeply, truly, embarrassingly <strong>lovable</strong>. Even I know it.</p>
+      </div>
+      <div class="two-col">
+        ${personalityList.slice(0,4).map(p => `
+        <div class="fun-card">
+          <div class="icon">${p.toLowerCase().includes('sass') ? '😏' : p.toLowerCase().includes('spunk') ? '⚡' : p.toLowerCase().includes('love') ? '💕' : '🌟'}</div>
+          <h4>${p}</h4>
+          <p>Yes, very. All the time. Always.</p>
+        </div>`).join('')}
+      </div>
+      <div class="page-number">2</div>
+    </div>
+
+    <!-- PAGE 3: HOBBIES -->
+    <div class="page">
+      <div class="page-corner"></div>
+      <div class="page-header">
+        <div class="page-emoji">🎾</div>
+        <div class="page-title">
+          Chapter 3: My Hobbies & Passions
+          <span>Things I take very seriously</span>
+        </div>
+      </div>
+      <div class="illustration">🎾 🦴 🐾 🏃 🦴</div>
+      <div class="story-text">
+        <p>I am a dog of many interests. Some would say I'm <em>well-rounded</em>. I say I'm <em>thriving</em>.</p>
+        <div class="quote">"My schedule is full. Treats at 7. Treats at 9. Ball at 10. Treats at 11. Belly rubs 12-2. Walk. Treats. Repeat. I am BUSY."</div>
+        <p>My passions include, but are not limited to: <strong>${hobbies}</strong>. I have ranked these in my head by priority (treats are always first, no exceptions, do not negotiate with me on this).</p>
+        <p>The walks, though — the <em>walks</em>. Every single sniff is a text message from the universe, and I read every single one. Annabelle says I take too long. Annabelle is wrong.</p>
+      </div>
+      <div class="fact-chips">
+        ${hobbyList.map(h => `<div class="chip">${h.trim()}</div>`).join('')}
+      </div>
+      <div class="page-number">3</div>
+    </div>
+
+    <!-- PAGE 4: TOYS -->
+    <div class="page">
+      <div class="page-corner"></div>
+      <div class="page-header">
+        <div class="page-emoji">🧸</div>
+        <div class="page-title">
+          Chapter 4: My Prized Possessions
+          <span>Do NOT touch without permission</span>
+        </div>
+      </div>
+      <div class="illustration">🎾 ⚽ 🧸</div>
+      <div class="story-text">
+        <p>I have toys. Wonderful, beautiful, perfect toys. They are all mine. If you touch them, I will look at you with deep disappointment and then bring the toy to you anyway because I want to play. I contain contradictions.</p>
+        <div class="quote">"My toy chest is organized. Just not in a way that makes sense to humans. I know where everything is. I take offense to questions."</div>
+        <p>My personal favorites are <strong>${toys}</strong>. Each one holds a special place in my heart and also in my mouth. I have squeaked each toy approximately ten thousand times. The squeaky noise is called <em>music</em> and Lexie simply does not appreciate art.</p>
+        <p>Sometimes I carry a toy to the door when my people come home. This is not because I'm excited — it's a <em>gift offering</em>. I'm basically royalty performing a ceremony. You're welcome.</p>
+      </div>
+      <div class="fact-chips">
+        ${toyList.map(t => `<div class="chip">🧸 ${t.trim()}</div>`).join('')}
+      </div>
+      <div class="page-number">4</div>
+    </div>
+
+    <!-- PAGE 5: MY HUMANS -->
+    <div class="page">
+      <div class="page-corner"></div>
+      <div class="page-header">
+        <div class="page-emoji">💕</div>
+        <div class="page-title">
+          Chapter 5: My People (They're Alright)
+          <span>A heartfelt dedication</span>
+        </div>
+      </div>
+      <div class="illustration">👨‍👩‍👧 🐶 💕</div>
+      <div class="story-text">
+        <p>Now. I would be nothing without my humans. And by "nothing" I mean I would still be absolutely amazing but slightly less spoiled. So they matter.</p>
+        <div class="quote">"They feed me. They walk me. They give me belly rubs on demand. Honestly? A great team. Strong five stars. Would recommend."</div>
+        <p>I love <strong>${allOwners}</strong> with my whole, entire, fluffy heart. Even when they say "no" to a third treat. Even when they put me in a bath. Even when they use the word "vet." My love is unconditional. Well — almost. It's heavily conditional on treat availability.</p>
+        <p>But at the end of every day, when I curl up and find my favorite warm human lap, I think: <em>this is it. This is the good stuff.</em></p>
+        <div class="quote">"I am ${firstName} the ${doodleType}. I am ${age} old. I am ${hair} and magnificent. And I am deeply, completely, ridiculously loved. 🐾"</div>
+      </div>
+      <div class="page-number">5</div>
+    </div>
+
+    <!-- DEDICATION -->
+    <div class="dedication">
+      <p>📖 <em>This book is dedicated to</em> 📖</p>
+      <br>
+      <strong>${allOwners}</strong>
+      <br><br>
+      <p>Thank you for every treat, every walk, every belly rub, and every time you said <em>"who's a good boy?!"</em></p>
+      <br>
+      <p style="font-size:2rem">🐾 🦴 ❤️ 🦴 🐾</p>
+    </div>
+  `;
+
+  const bookPages = document.getElementById('bookPages');
+  bookPages.innerHTML = pages;
+  bookPages.classList.add('visible');
+  bookPages.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Auto-generate on load with defaults
+window.addEventListener('load', generateStory);
+</script>
+
+</body>
+</html>
